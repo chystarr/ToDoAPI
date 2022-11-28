@@ -78,11 +78,13 @@ namespace ToDoAPI.Controllers
         // PUT: api/tasks/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutToDoTask(int id, ToDoTask toDoTask)
+        //public async Task<IActionResult> PutToDoTask(int id, ToDoTask toDoTask)
+        public async Task<Response> PutToDoTask(int id, ToDoTask toDoTask)
         {
             if (id != toDoTask.ToDoTaskId)
             {
-                return BadRequest();
+                //return BadRequest();
+                return new Response { StatusCode = 400, StatusDescription = "API call failed - incorrect ID" };
             }
 
             _context.Entry(toDoTask).State = EntityState.Modified;
@@ -95,7 +97,8 @@ namespace ToDoAPI.Controllers
             {
                 if (!ToDoTaskExists(id))
                 {
-                    return NotFound();
+                    //return NotFound();
+                    return new Response { StatusCode = 404, StatusDescription = "API call failed - no task found with that ID" };
                 }
                 else
                 {
@@ -103,7 +106,8 @@ namespace ToDoAPI.Controllers
                 }
             }
 
-            return NoContent();
+            //return NoContent();
+            return new Response { StatusCode = 204, StatusDescription = "API call successful" };
         }
 
         // POST: api/tasks

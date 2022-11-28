@@ -59,6 +59,7 @@ namespace ToDoAPI.Controllers
         }
         */
 
+        /*
         // PUT: api/categories/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
@@ -89,6 +90,7 @@ namespace ToDoAPI.Controllers
 
             return NoContent();
         }
+        */
 
         // POST: api/categories
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754

@@ -20,7 +20,7 @@ namespace ToDoAPI.Controllers
             _context = context;
         }
 
-        
+
         // GET: api/steps
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Step>>> GetSteps()
@@ -76,11 +76,13 @@ namespace ToDoAPI.Controllers
         // PUT: api/steps/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutStep(int id, Step step)
+        //public async Task<IActionResult> PutStep(int id, Step step)
+        public async Task<Response> PutStep(int id, Step step)
         {
             if (id != step.StepId)
             {
-                return BadRequest();
+                //return BadRequest();
+                return new Response { StatusCode = 400, StatusDescription = "API call failed - incorrect ID" };
             }
 
             _context.Entry(step).State = EntityState.Modified;
@@ -93,7 +95,8 @@ namespace ToDoAPI.Controllers
             {
                 if (!StepExists(id))
                 {
-                    return NotFound();
+                    //return NotFound();
+                    return new Response { StatusCode = 404, StatusDescription = "API call failed - no step found with that ID" };
                 }
                 else
                 {
@@ -101,7 +104,8 @@ namespace ToDoAPI.Controllers
                 }
             }
 
-            return NoContent();
+            // return NoContent();
+            return new Response { StatusCode = 204, StatusDescription = "API call successful" };
         }
 
         // POST: api/steps
