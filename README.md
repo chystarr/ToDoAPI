@@ -4,7 +4,7 @@
 Returns all categories
 <br/>
 Example response body:
-'''
+```
 {
     "statusCode":200,
     "statusDescription":"API call successful",
@@ -25,7 +25,7 @@ Example response body:
     "returnedToDoTasks":null,
     "returnedSteps":null
 }
-'''
+```
 
 ## GET /api/tasks
 Returns all tasks
