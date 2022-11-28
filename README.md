@@ -1,34 +1,34 @@
-## Endpoints
+# Endpoints
 
-# GET /api/categories
+## GET /api/categories
 Returns all categories
 
-# GET /api/tasks
+## GET /api/tasks
 Returns all tasks
 
-# GET /api/tasks/fromCategory/{categoryId}
+## GET /api/tasks/fromCategory/{categoryId}
 Returns all tasks belonging to a certain category
 
-# GET /api/tasks/incomplete
+## GET /api/tasks/incomplete
 Returns all incomplete tasks
 
-# GET /api/steps/fromTask/{taskId}
+## GET /api/steps/fromTask/{taskId}
 Returns all steps belonging to a certain task
 
-# GET /api/steps/ fromTask/{taskId}/incomplete
+## GET /api/steps/ fromTask/{taskId}/incomplete
 Returns all incomplete steps belonging to a certain task
 
-# POST /api/categories
+## POST /api/categories
 Add a new category
 
-# POST /api/tasks
+## POST /api/tasks
 Add a new task
 
-# POST /api/steps
+## POST /api/steps
 Add a new step
 
-# PUT /api/tasks/{id}
+## PUT /api/tasks/{id}
 Update a task
 
-# PUT /api/steps/{id}
+## PUT /api/steps/{id}
 Update a step
