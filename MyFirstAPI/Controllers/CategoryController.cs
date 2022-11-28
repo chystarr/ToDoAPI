@@ -22,32 +22,42 @@ namespace ToDoAPI.Controllers
 
         // GET: api/categories
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Category>>> GetCategories()
+        //public async Task<ActionResult<IEnumerable<Category>>> GetCategories()
+        public async Task<Response> GetCategories()
         {
           if (_context.Categories == null)
           {
-              return NotFound();
+                // return NotFound();
+                return new Response { StatusCode = 404, StatusDescription = "API call failed - no categories found" };
           }
-            return await _context.Categories.ToListAsync();
+            //return await _context.Categories.ToListAsync();
+            var returnedCategories = await _context.Categories.ToListAsync();
+            return new Response { StatusCode = 200, StatusDescription = "API call successful", ReturnedCategories = returnedCategories };
         }
 
+        /*
         // GET: api/categories/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Category>> GetCategory(int id)
+        //public async Task<ActionResult<Category>> GetCategory(int id)
+        public async Task<Response> GetCategory(int id)
         {
           if (_context.Categories == null)
           {
-              return NotFound();
-          }
+                //return NotFound();
+                return new Response { StatusCode = 404, StatusDescription = "API call failed - no categories found" };
+            }
             var category = await _context.Categories.FindAsync(id);
 
             if (category == null)
             {
-                return NotFound();
+                //return NotFound();
+                return new Response { StatusCode = 404, StatusDescription = "API call failed - no category found with that ID" };
             }
 
-            return category;
+            //return category;
+
         }
+        */
 
         // PUT: api/categories/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
@@ -83,18 +93,20 @@ namespace ToDoAPI.Controllers
         // POST: api/categories
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Category>> PostCategory(Category category)
+        //public async Task<ActionResult<Category>> PostCategory(Category category)
+        public async Task<Response> PostCategory(Category category)
         {
           if (_context.Categories == null)
           {
-              return Problem("Entity set 'ToDoAPIDBContext.Categories'  is null.");
+              //return Problem("Entity set 'ToDoAPIDBContext.Categories'  is null.");
+              return new Response { StatusCode = 400, StatusDescription = "API call failed - no categories table found" };
           }
             _context.Categories.Add(category);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetCategory", new { id = category.CategoryId }, category);
         }
-
+        /*
         // DELETE: api/categories/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCategory(int id)
@@ -114,6 +126,7 @@ namespace ToDoAPI.Controllers
 
             return NoContent();
         }
+        */
 
         private bool CategoryExists(int id)
         {

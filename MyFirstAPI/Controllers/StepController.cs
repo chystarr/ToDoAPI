@@ -20,6 +20,7 @@ namespace ToDoAPI.Controllers
             _context = context;
         }
 
+        
         // GET: api/steps
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Step>>> GetSteps()
@@ -30,15 +31,23 @@ namespace ToDoAPI.Controllers
           }
             return await _context.Steps.ToListAsync();
         }
+        
 
-        // GET: api/steps/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Step>> GetStep(int id)
+        // GET: api/steps/fromTask/5
+        [HttpGet("fromTask/{taskId}")]
+        public async Task<Response> GetStepsFromToDoTask(int toDoTaskId)
+        //public async Task<ActionResult<IEnumerable<Step>>> GetStepsFromTask(int toDoTaskId)
+        //public async Task<ActionResult<Step>> GetStep(int id)
         {
           if (_context.Steps == null)
           {
-              return NotFound();
-          }
+                //return NotFound();
+                return new Response { StatusCode = 404, StatusDescription = "API call failed - no steps found" };
+            }
+            var returnedSteps = await _context.Steps.Where(step => step.ToDoTaskId == toDoTaskId).ToListAsync();
+            //var returnedSteps = await _context.Steps.ToListAsync();
+            return new Response { StatusCode = 200, StatusDescription = "API call successful", ReturnedSteps = returnedSteps };
+            /*
             var step = await _context.Steps.FindAsync(id);
 
             if (step == null)
@@ -47,6 +56,21 @@ namespace ToDoAPI.Controllers
             }
 
             return step;
+            */
+        }
+
+        // GET: api/steps/fromTask/5/incomplete
+        [HttpGet("fromTask/{taskId}/incomplete")]
+        //public async Task<ActionResult<IEnumerable<Step>>> GetIncompleteStepsFromTask(int toDoTaskId)
+        public async Task<Response> GetIncompleteStepsFromTask(int toDoTaskId)
+        {
+            if (_context.Steps == null)
+            {
+                //return NotFound();
+                return new Response { StatusCode = 404, StatusDescription = "API call failed - no steps found" };
+            }
+            var returnedSteps = await _context.Steps.Where(step => step.ToDoTaskId == toDoTaskId && step.IsComplete == false).ToListAsync();
+            return new Response { StatusCode = 200, StatusDescription = "API call successful", ReturnedSteps = returnedSteps };
         }
 
         // PUT: api/steps/5
@@ -95,6 +119,7 @@ namespace ToDoAPI.Controllers
             return CreatedAtAction("GetStep", new { id = step.StepId }, step);
         }
 
+        /*
         // DELETE: api/steps/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteStep(int id)
@@ -114,6 +139,7 @@ namespace ToDoAPI.Controllers
 
             return NoContent();
         }
+        */
 
         private bool StepExists(int id)
         {
