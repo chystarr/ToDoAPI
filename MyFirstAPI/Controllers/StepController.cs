@@ -107,16 +107,19 @@ namespace ToDoAPI.Controllers
         // POST: api/steps
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Step>> PostStep(Step step)
+        //public async Task<ActionResult<Step>> PostStep(Step step)
+        public async Task<Response> PostStep(Step step)
         {
           if (_context.Steps == null)
           {
-              return Problem("Entity set 'ToDoAPIDBContext.Steps'  is null.");
-          }
+                //return Problem("Entity set 'ToDoAPIDBContext.Steps'  is null.");
+                return new Response { StatusCode = 400, StatusDescription = "API call failed - no steps table found" };
+            }
             _context.Steps.Add(step);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetStep", new { id = step.StepId }, step);
+            //return CreatedAtAction("GetStep", new { id = step.StepId }, step);
+            return new Response { StatusCode = 201, StatusDescription = "API call successful" };
         }
 
         /*

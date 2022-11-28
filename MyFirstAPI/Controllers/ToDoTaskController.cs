@@ -109,16 +109,19 @@ namespace ToDoAPI.Controllers
         // POST: api/tasks
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<ToDoTask>> PostToDoTask(ToDoTask toDoTask)
+        //public async Task<ActionResult<ToDoTask>> PostToDoTask(ToDoTask toDoTask)
+        public async Task<Response> PostToDoTask(ToDoTask toDoTask)
         {
           if (_context.ToDoTasks == null)
           {
-              return Problem("Entity set 'ToDoAPIDBContext.ToDoTasks'  is null.");
-          }
+                //return Problem("Entity set 'ToDoAPIDBContext.ToDoTasks'  is null.");
+                return new Response { StatusCode = 400, StatusDescription = "API call failed - no tasks table found" };
+            }
             _context.ToDoTasks.Add(toDoTask);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetToDoTask", new { id = toDoTask.ToDoTaskId }, toDoTask);
+            //return CreatedAtAction("GetToDoTask", new { id = toDoTask.ToDoTaskId }, toDoTask);
+            return new Response { StatusCode = 201, StatusDescription = "API call successful" };
         }
 
         /*

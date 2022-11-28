@@ -104,7 +104,8 @@ namespace ToDoAPI.Controllers
             _context.Categories.Add(category);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetCategory", new { id = category.CategoryId }, category);
+            //return CreatedAtAction("GetCategory", new { id = category.CategoryId }, category);
+            return new Response { StatusCode = 201, StatusDescription = "API call successful" };
         }
         /*
         // DELETE: api/categories/5
