@@ -3,8 +3,29 @@
 ## GET /api/categories
 Returns all categories
 <br/>
-Example request body:
-    {}
+Example response body:
+'''
+{
+    "statusCode":200,
+    "statusDescription":"API call successful",
+    "returnedCategories":[
+        {
+            "categoryId":1,
+            "categoryName":"Studying"
+        },
+        {
+            "categoryId":2,
+            "categoryName":"Chores"
+        },
+        {
+            "categoryId":3,
+            "categoryName":"Assignments"
+        }
+    ],
+    "returnedToDoTasks":null,
+    "returnedSteps":null
+}
+'''
 
 ## GET /api/tasks
 Returns all tasks
