@@ -6,7 +6,7 @@ namespace ToDoAPI.Models
         public int ToDoTaskId { get; set; }
         public string ToDoTaskText { get; set; }
         public bool IsComplete { get; set; }
-        public Category Category { get; set; }
+        public int CategoryId { get; set; }
     }
 }
 
