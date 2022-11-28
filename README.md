@@ -2,6 +2,9 @@
 
 ## GET /api/categories
 Returns all categories
+<br/>
+Example request body:
+    {}
 
 ## GET /api/tasks
 Returns all tasks
