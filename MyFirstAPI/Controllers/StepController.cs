@@ -35,7 +35,7 @@ namespace ToDoAPI.Controllers
         
 
         // GET: api/steps/fromTask/5
-        [HttpGet("fromTask/{taskId}")]
+        [HttpGet("fromTask/{toDoTaskId}")]
         public async Task<Response> GetStepsFromToDoTask(int toDoTaskId)
         //public async Task<ActionResult<IEnumerable<Step>>> GetStepsFromTask(int toDoTaskId)
         //public async Task<ActionResult<Step>> GetStep(int id)
@@ -61,7 +61,7 @@ namespace ToDoAPI.Controllers
         }
 
         // GET: api/steps/fromTask/5/incomplete
-        [HttpGet("fromTask/{taskId}/incomplete")]
+        [HttpGet("fromTask/{toDoTaskId}/incomplete")]
         //public async Task<ActionResult<IEnumerable<Step>>> GetIncompleteStepsFromTask(int toDoTaskId)
         public async Task<Response> GetIncompleteStepsFromTask(int toDoTaskId)
         {

@@ -122,9 +122,75 @@ Example response body:
 
 ## GET /api/steps/fromTask/{taskId}
 Returns all steps belonging to a certain task
+<br/><br/>
+Example response body:
+```
+{
+    "statusCode":200,
+    "statusDescription":"API call successful",
+    "returnedCategories":null,
+    "returnedToDoTasks":null,
+    "returnedSteps":[
+        {
+            "stepId": 5,
+            "stepText": "Write proposal",
+            "isComplete": true,
+            "toDoTaskId": 2
+        },
+        {
+            "stepId": 6,
+            "stepText": "Make database",
+            "isComplete": true,
+            "toDoTaskId": 2
+        },
+        {
+            "stepId": 7,
+            "stepText": "Plan API endpoints",
+            "isComplete": true,
+            "toDoTaskId": 2
+        },
+        {
+            "stepId": 7,
+            "stepText": "Make models",
+            "isComplete": false,
+            "toDoTaskId": 2
+        },
+        {
+            "stepId": 7,
+            "stepText": "Make controllers",
+            "isComplete": false,
+            "toDoTaskId": 2
+        }
+    ]
+}
+```
 
-## GET /api/steps/ fromTask/{taskId}/incomplete
+## GET /api/steps/fromTask/{taskId}/incomplete
 Returns all incomplete steps belonging to a certain task
+<br/><br/>
+Example response body:
+```
+{
+    "statusCode":200,
+    "statusDescription":"API call successful",
+    "returnedCategories":null,
+    "returnedToDoTasks":null,
+    "returnedSteps":[
+        {
+            "stepId": 7,
+            "stepText": "Make models",
+            "isComplete": false,
+            "toDoTaskId": 2
+        },
+        {
+            "stepId": 7,
+            "stepText": "Make controllers",
+            "isComplete": false,
+            "toDoTaskId": 2
+        }
+    ]
+}
+```
 
 ## POST /api/categories
 Add a new category
