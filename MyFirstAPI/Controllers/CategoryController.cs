@@ -22,52 +22,23 @@ namespace ToDoAPI.Controllers
 
         // GET: api/categories
         [HttpGet]
-        //public async Task<ActionResult<IEnumerable<Category>>> GetCategories()
         public async Task<Response> GetCategories()
         {
           if (_context.Categories == null)
           {
-                // return NotFound();
                 return new Response { StatusCode = 404, StatusDescription = "API call failed - no categories found" };
           }
-            //return await _context.Categories.ToListAsync();
             var returnedCategories = await _context.Categories.ToListAsync();
             return new Response { StatusCode = 200, StatusDescription = "API call successful", ReturnedCategories = returnedCategories };
         }
 
-        /*
-        // GET: api/categories/5
-        [HttpGet("{id}")]
-        //public async Task<ActionResult<Category>> GetCategory(int id)
-        public async Task<Response> GetCategory(int id)
-        {
-          if (_context.Categories == null)
-          {
-                //return NotFound();
-                return new Response { StatusCode = 404, StatusDescription = "API call failed - no categories found" };
-            }
-            var category = await _context.Categories.FindAsync(id);
-
-            if (category == null)
-            {
-                //return NotFound();
-                return new Response { StatusCode = 404, StatusDescription = "API call failed - no category found with that ID" };
-            }
-
-            //return category;
-
-        }
-        */
-
-        /*
         // PUT: api/categories/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCategory(int id, Category category)
+        public async Task<Response> PutCategory(int id, Category category)
         {
             if (id != category.CategoryId)
             {
-                return BadRequest();
+                return new Response { StatusCode = 400, StatusDescription = "API call failed - incorrect ID" };
             }
 
             _context.Entry(category).State = EntityState.Modified;
@@ -80,7 +51,7 @@ namespace ToDoAPI.Controllers
             {
                 if (!CategoryExists(id))
                 {
-                    return NotFound();
+                    new Response { StatusCode = 404, StatusDescription = "API call failed - no category found with that ID" };
                 }
                 else
                 {
@@ -88,48 +59,21 @@ namespace ToDoAPI.Controllers
                 }
             }
 
-            return NoContent();
+            return new Response { StatusCode = 204, StatusDescription = "API call successful" };
         }
-        */
 
         // POST: api/categories
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        //public async Task<ActionResult<Category>> PostCategory(Category category)
         public async Task<Response> PostCategory(Category category)
         {
           if (_context.Categories == null)
           {
-              //return Problem("Entity set 'ToDoAPIDBContext.Categories'  is null.");
               return new Response { StatusCode = 400, StatusDescription = "API call failed - no categories table found" };
           }
             _context.Categories.Add(category);
             await _context.SaveChangesAsync();
-
-            //return CreatedAtAction("GetCategory", new { id = category.CategoryId }, category);
             return new Response { StatusCode = 201, StatusDescription = "API call successful" };
         }
-        /*
-        // DELETE: api/categories/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteCategory(int id)
-        {
-            if (_context.Categories == null)
-            {
-                return NotFound();
-            }
-            var category = await _context.Categories.FindAsync(id);
-            if (category == null)
-            {
-                return NotFound();
-            }
-
-            _context.Categories.Remove(category);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
-        }
-        */
 
         private bool CategoryExists(int id)
         {
