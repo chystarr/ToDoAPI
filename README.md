@@ -226,6 +226,16 @@ Example request body:
 }
 ```
 
+## PUT /api/categories/{id}
+Update a category
+<br/><br/>
+Example request body:
+```
+{
+    "categoryname":"Technical interview prep"
+}
+```
+
 ## PUT /api/tasks/{id}
 Update a task
 <br/><br/>
